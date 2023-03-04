@@ -2,16 +2,16 @@ let searchInputEl = document.getElementById("searchInput");
 let searchResultsEl = document.getElementById("searchResults");
 let headingEL = document.createElement("h1");
 let spinners = document.getElementById("spinners");
-let searchHeading=document.getElementById("searchHeading")
-let k=[]
-let oldValue=""
+let searchHeading=document.getElementById("searchHeading");
+let k=[];
+let oldValue="";
 
 headingEL.classList.add("heading_1", "w-100", "text-center");
 searchHeading.appendChild(headingEL);
 
 function create_and_append_book(title, imageLink, author) {
     let container_book = document.createElement("div");
-    container_book.classList.add("p-1", "d-flex", "flex-column", "col-12", "col-md-5");
+    container_book.classList.add("p-1", "d-flex", "flex-column", "col-12", "col-md-5", "col-md-4", "col-lg-3");
     let book_image = document.createElement("img");
     book_image.src = imageLink;
     book_image.classList.add("image", "ml-auto", "mr-auto");
@@ -25,7 +25,7 @@ function create_and_append_book(title, imageLink, author) {
 
 function heading(b) {
     spinners.classList.add("d-none");
-    console.log(b.length)
+    //console.log(b.length);
     if (b.length === 0) {
         headingEL.textContent = "No results found";
     } else {
@@ -39,17 +39,17 @@ function heading(b) {
             create_and_append_book(title, imageLink, author);
         }
     }
-};
+}
 
 function searchResultsElFunction(){
     searchInputEl.addEventListener("keyup", function(event) {
         if (event.target.value!==""){
             let newValue=event.target.value;
             spinners.classList.remove("d-none");
-            k=[]
+            k=[];
             let enteredValue = event.target.value;
-            console.log(enteredValue);
-            console.log(event.type);
+            //console.log(enteredValue);
+            //console.log(event.type);
             let url = "https://apis.ccbp.in/book-store?title=" + enteredValue;
             let options = {
                 method: "GET"
@@ -61,20 +61,20 @@ function searchResultsElFunction(){
                 .then(function(response) {
                     let a = JSON.parse(response);
                     let b = a.search_results;
-                    k=b
+                    k=b;
                     heading(k);
                     //console.log(k);
                     //console.log(searchResultsEl)
-                }) 
+                }); 
             if (oldValue!==newValue){
                 oldValue=newValue;
-                searchResultsEl.innerHTML=""
+                searchResultsEl.innerHTML="";
             }
         }
         else{
-            searchResultsEl.innerHTML=""
+            searchResultsEl.innerHTML="";
         }
-    })
+    });
 }
 
 searchResultsElFunction();

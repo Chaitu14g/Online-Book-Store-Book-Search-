@@ -12,12 +12,13 @@
 
 .heading {
     color: #ffffff;
-    font-size: 50px;
+    font-size: 30px;
 }
 
 .second_container {
     height: 70vh;
     padding: 5px;
+    max-width: 2000px !important;
 }
 
 .heading_1 {
